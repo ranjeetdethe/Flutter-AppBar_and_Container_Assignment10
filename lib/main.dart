@@ -9,24 +9,37 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
+    return const MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            "Core2web",
-            style: TextStyle(fontSize: 30,fontWeight: FontWeight.w500),
-          ),
-          centerTitle: true,
-          backgroundColor: Colors.blue,
-          actions:  [
-            IconButton(icon: const Icon(Icons.notifications), onPressed: ( ){ },),
-            IconButton(onPressed:(){}, icon:const Icon(Icons.access_alarm))
-          ],
-          
-        )
-        
+        body: ScrollableContainer(),
       ),
     );
+  }
+}
+
+class ScrollableContainer extends StatelessWidget {
+  const ScrollableContainer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: List.generate(10, (index) {
+          return Container(
+            width: 300, // Set the width of the container
+            height: 300, // Set the height of the container
+            decoration: BoxDecoration(
+              color: Colors.primaries[index % Colors.primaries.length],
+              border: Border.all(color: Colors.red, width: 2), // Add red border
+            ),
+            alignment: Alignment.center,
+            child: Text(
+              'Container ${index + 1}',
+              style: const TextStyle(color: Colors.white, fontSize: 20),
+            ),
+          );
+        })),
+    );
+      
   }
 }
